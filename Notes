@@ -1,0 +1,16 @@
+
+PYGAME
+
+must import then initialize with init()
+need to create a window (surface)
+EVERYTHING IN PYGAME IS A SURFACE
+pygame.draw method can draw multiple shapes -- each shape has different parameters (ex. circle takes size and radius)
+    colors and their values:
+    https://www.webucator.com/blog/2015/03/python-color-constants-module/
+things dont show up immideatly! you have to refresh the display!!
+
+a few ways to move characters:
+you can move with if statements taking in input from the keyboard
+
+GRID IN PYGAME GOES FROM TOP LEFT - NOT NEG/POS/UP/DOWN
+to move characters,
