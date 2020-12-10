@@ -5,8 +5,6 @@ import Constants
 def initialize_game():
     pygame.init()
     screen = pygame.display.set_mode((Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT))
-    pygame.display.set_caption(Constants.CAPTION)
-    screen.fill(Constants.CREAM)
     return screen
 
 def game_loop(surface, gameMap):
@@ -47,8 +45,8 @@ def draw_map(surface, map_tiles):
 
 def draw_grid(surface):
     for i in range(Constants.BLOCKS_WIDE):
-        new_height = round(i * Constants.BLOCK_HEIGHT)
-        new_width = round(i * Constants.BLOCK_WIDTH)
+        new_height = i * Constants.BLOCK_HEIGHT
+        new_width = i * Constants.BLOCK_WIDTH
         pygame.draw.line(surface, Constants.BLACK, (0, new_height), (Constants.SCREEN_WIDTH, new_height), 2)
         pygame.draw.line(surface, Constants.BLACK, (new_width, 0), (new_width, Constants.SCREEN_HEIGHT), 2)
 

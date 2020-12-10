@@ -12,6 +12,7 @@ class Player:
     def __init__(self):  # constructs player with hand,
         self.hand = []
         self.tracker = Tracker()
+        self.position[]
 
     def addCard(self, card):  # adds card to hand
        self.hand.append(card)
@@ -30,5 +31,10 @@ class Player:
         person = str(input("What suspect is your final accusation?"))
         weapon = str(input("What weapon is your final accusation?"))
         room = str(input("What room is your final accusation?"))
+
+    def guess(self):
+        person = str(input("Suspect?"))
+        weapon = str(input("Weapon?"))
+        room =
 
 
