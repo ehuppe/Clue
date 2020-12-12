@@ -28,8 +28,11 @@ pygame.draw.rect(screen, Constants.LOUNGE, loungeTile)
 studyTile = pygame.Rect((Constants.BLOCK_WIDTH * 8), (Constants.SCREEN_HEIGHT - (Constants.BLOCK_HEIGHT * 2)), (Constants.BLOCK_WIDTH * 4), (Constants.BLOCK_HEIGHT * 2))
 pygame.draw.rect(screen, Constants.STUDY, studyTile)
 
-#for j in range(1, 12):
-    #pygame.draw.line(screen, Constants.BLACK, (Constants.BLOCK_WIDTH * j), (Constants.BLOCK_HEIGHT * 5))
+for j in range(1, 12):
+    pygame.draw.line(screen, Constants.BLACK, ((Constants.BLOCK_WIDTH * j), (Constants.BLOCK_HEIGHT * 2)), ((Constants.BLOCK_WIDTH * j), (Constants.BLOCK_HEIGHT * 7)))
+
+for j in range(2, 7):
+    pygame.draw.line(screen, Constants.BLACK, (0, (Constants.BLOCK_HEIGHT * j)), (Constants.SCREEN_WIDTH, (Constants.BLOCK_HEIGHT * j)))
 
 run = True
 while (run):

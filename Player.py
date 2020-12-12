@@ -9,10 +9,23 @@ import random
 
 class Player:
 
-    def __init__(self):  # constructs player with hand,
+    def __init__(self, symbol):  # constructs player with hand,
         self.hand = []
         self.tracker = Tracker()
-        self.position[]
+        self.position = []
+        self.symbol = symbol
+
+    def getSymbol(self):
+        return self.symbol
+
+    def getPosition(self):
+        return self.position
+
+    def changePosition(self, x, y):
+        self.position = [x, y]
+
+    def rollDice(self):
+        return random.randint(1, 7)
 
     def addCard(self, card):  # adds card to hand
        self.hand.append(card)
