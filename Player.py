@@ -1,9 +1,9 @@
 
-import Card
+from Card import Card
 
-import CardDeck
+from CardDeck import Deck
 
-import Tracker
+from Tracker import Tracker
 
 import random
 
@@ -36,8 +36,9 @@ class Player:
     def checkTracker(self):  # looks at tracker
         self.tracker.look()
 
-    def guess(self, person, weapon, room):  # makes a guess
-        pass
+    def showHand(self):
+        for x in self.hand:
+            x.show()
 
     def accuse(self, deck):  # makes final accusation
         self.checkTracker()
@@ -48,6 +49,6 @@ class Player:
     def guess(self):
         person = str(input("Suspect?"))
         weapon = str(input("Weapon?"))
-        room =
+        #room =
 
 

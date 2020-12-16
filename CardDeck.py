@@ -1,5 +1,5 @@
 
-import Card
+from Card import Card
 import random
 
 class Deck:
@@ -8,7 +8,7 @@ class Deck:
         self.weapons = []
         self.rooms = []
         self.cards = []
-        self.murder = []
+        self.murderCards = []
 
     def build(self):  # fills the people, weapons, and rooms decks
         for p in ["Miss Scarlett", "Colonel Mustard", "Mrs. White", "Mr. Green", "Mrs. Peacock", "Professor Plum"]:
@@ -19,21 +19,12 @@ class Deck:
             self.rooms.append(Card(3, r))
 
     def murder(self):  # murder occurs -- picks murder carsd and removes them from the respective decks
-        x = random.randint(0, 6)
-        self.murder.append(self.people.pop(x))
-        x = random.randint(0 , 6)
-        self.murder.append(self.weapons.pop(x))
-        x = random.randint(0 ,6)
-        self.murder.append(self.rooms.pop(x))
-
-    def checkAccusation(self, person, weapon, room):
-        if (self.murder[0].getName() == person):
-            if (self.murder[1].getName() == weapon):
-                if (self.murder[2].getName() == room):
-                    print("You won!")
-                    return True
-        print("You lose!")
-        return False
+        x = random.randint(0, 5)
+        self.murderCards.append(self.people.pop(x))
+        x = random.randint(0 , 5)
+        self.murderCards.append(self.weapons.pop(x))
+        x = random.randint(0 ,5)
+        self.murderCards.append(self.rooms.pop(x))
 
     def fullDeck(self):  # constructs full deck without murder cards
         for c in self.people:
@@ -48,15 +39,34 @@ class Deck:
             r = random.randint(0, 1)
             self.cards[i], self.cards[r] = self.cards[r], self.cards[i]
 
+    def setUpGame(self, players):
+        self.build()
+        self.murder()
+        self.fullDeck()
+        self.shuffle()
+        self.deal(players)
+
     def show(self):  # shows whole deck - for code editing purposes
         for c in self.cards:
             c.show()
 
     def deal(self, players):  # takes a list of players, deals cards to players
-        self.shuffle()
-        for x in len(self.cards):
-            for p in len(players):
-                players[p].addCard(self.cards.pop())
+        for x in range(1, len(self.cards) - 1):
+            if (len(self.cards) <= 0):
+                break
+            else:
+                for p in players:
+                    p.addCard(self.cards.pop())
+
+
+    def checkAccusation(self, person, weapon, room):
+        if (self.murderCards[0].getName() == person):
+            if (self.murderCards[1].getName() == weapon):
+                if (self.murderCards[2].getName() == room):
+                    print("You won!")
+                    return True
+        print("You lose!")
+        return False
 
 
 

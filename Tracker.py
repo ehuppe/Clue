@@ -1,5 +1,6 @@
 
 class Tracker:
+
     def __init__(self):  # construct tracker with dictionaries for each type of card
         self.people = {"Miss Scarlett": "?",
                        "Colonel Mustard": "?",

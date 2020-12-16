@@ -1,42 +1,24 @@
-import pygame
+from Player import Player
+from Card import Card
+from CardDeck import Deck
+from TextBoard import Board
 
- # initialize the pygame
-pygame.init()
+player1 = Player("*")
+player2 = Player("+")
+player3 = Player("#")
+player4 = Player("@")
+players = [player1, player2, player3, player4]
 
- # create the screen
-screen = pygame.display.set_mode((1000,1000))
+deck = Deck()
+deck.setUpGame(players)
 
-pygame.display.set_caption("Welcome to Clue!")
+board = Board()
+board.printBoard()
 
-x = 10
-y = 10
-vel = 5
+for x in players:
+    print(x.getSymbol())
+    x.showHand()
 
-run = True
-while (run):
-    pygame.time.delay(100)
 
-    # check for events from user -- moving mouse, etc.
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            run = False
-            break
 
-    keys = pygame.key.get_pressed()
-
-    if keys[pygame.K_LEFT]:
-        x -= vel
-    if keys[pygame.K_RIGHT]:
-        x += vel
-    if keys[pygame.K_UP]:
-        y += vel
-    if keys[pygame.K_DOWN]:
-        y -= vel
-
-    #screen.fill(0,0,0)
-    pygame.draw.circle(screen, (255,48,48), (x, y), 20)
-    pygame.draw.line(screen, (248,248,255), (50,0), (50,1000), 10)
-    pygame.display.update()
-
-pygame.quit()
 

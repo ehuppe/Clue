@@ -1,18 +1,24 @@
 
-import Player
+from Player import Player
 
 class Board:
 
     def __init__(self):
-        self.board = ["k", "k", "k", "k", "b", "b", "b", "b", "c", "c", "c", "c",
-                      "k", "k", "k", "k", "b", "b", "b", "b", "c", "c", "c", "c",
-                      "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-",
-                      "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-",
-                      "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-",
-                      "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-",
-                      "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-",
-                      "d", "d", "d", "d", "l", "l", "l", "l", "s", "s", "s", "s",
-                      "d", "d", "d", "d", "l", "l", "l", "l", "s", "s", "s", "s"]
+        self.board = [["k", "k", "k", "k", "b", "b", "b", "b", "c", "c", "c", "c"],
+                      ["k", "k", "k", "k", "b", "b", "b", "b", "c", "c", "c", "c"],
+                      ["-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
+                      ["-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
+                      ["-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
+                      ["-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
+                      ["-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
+                      ["d", "d", "d", "d", "l", "l", "l", "l", "s", "s", "s", "s"],
+                      ["d", "d", "d", "d", "l", "l", "l", "l", "s", "s", "s", "s"]]
+
+    def printBoard(self):
+        for r in self.board:
+            for c in r:
+                print(c, end=" ")
+            print()
 
     def placePlayer(self, player, x, y):
         self.board[x][y] = player.getSymbol()
@@ -25,6 +31,11 @@ class Board:
             return False
         else:
             return True
+
+    def enterRoom(self, player):
+        y = player.getPosition()[1]
+        if (y < 2 or y > 6):
+            return (True, self.board[player.getPosition()[0]][y])
 
     def move(self, player, roll):
         for i in range(1, roll + 1):
