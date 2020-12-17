@@ -27,10 +27,10 @@ class Tracker:
         print(self.rooms)
 
     def edit(self, type, name, status):  # edits tracker
-        if (type == "p"):
+        if (type == 1):
             self.people[name] = status
-        elif (type == "w"):
+        elif (type == 2):
             self.weapons[name] = status
         else:
-            self.room[name] = status
+            self.rooms[name] = status
 

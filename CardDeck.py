@@ -39,6 +39,18 @@ class Deck:
             r = random.randint(0, 1)
             self.cards[i], self.cards[r] = self.cards[r], self.cards[i]
 
+    def deal(self, players):  # takes a list of players, deals cards to players
+        empty = False
+        for x in range(0, len(self.cards) - 1):
+            for p in players:
+                if (len(self.cards) == 0):
+                    empty = True
+                    break
+                else:
+                    p.addCard(self.cards.pop(0))
+            if (empty):
+                break
+
     def setUpGame(self, players):
         self.build()
         self.murder()
@@ -46,18 +58,9 @@ class Deck:
         self.shuffle()
         self.deal(players)
 
-    def show(self):  # shows whole deck - for code editing purposes
-        for c in self.cards:
+    def showMurder(self):
+        for c in self.murderCards:
             c.show()
-
-    def deal(self, players):  # takes a list of players, deals cards to players
-        for x in range(1, len(self.cards) - 1):
-            if (len(self.cards) <= 0):
-                break
-            else:
-                for p in players:
-                    p.addCard(self.cards.pop())
-
 
     def checkAccusation(self, person, weapon, room):
         if (self.murderCards[0].getName() == person):

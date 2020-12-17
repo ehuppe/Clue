@@ -12,7 +12,7 @@ class Player:
     def __init__(self, symbol):  # constructs player with hand,
         self.hand = []
         self.tracker = Tracker()
-        self.position = []
+        self.position = [4, random.randint(0, 11)]
         self.symbol = symbol
 
     def getSymbol(self):
@@ -20,6 +20,9 @@ class Player:
 
     def getPosition(self):
         return self.position
+
+    def getHand(self):
+        return self.hand
 
     def changePosition(self, x, y):
         self.position = [x, y]

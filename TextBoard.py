@@ -1,5 +1,6 @@
 
 from Player import Player
+import random
 
 class Board:
 
@@ -20,9 +21,18 @@ class Board:
                 print(c, end=" ")
             print()
 
-    def placePlayer(self, player, x, y):
-        self.board[x][y] = player.getSymbol()
-        player.changePosition(x , y)
+    def setUpGame(self, players):
+        for player in players:
+            row = player.getPosition()[0]
+            col = player.getPosition()[1]
+            while (self.board[row][col] != "-"):
+                col = random.randint(0, 11)
+                player.changePosition(row, col)
+            self.placePlayer(player, row, col)
+
+    def placePlayer(self, player, row, col):
+        self.board[row][col] = player.getSymbol()
+        player.changePosition(row , col)
 
     def checkLegalPlacement(self, x, y):
         if (x > 11 or x < 0):
