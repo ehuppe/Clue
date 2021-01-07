@@ -25,83 +25,85 @@ class Board:
         for player in players:
             row = player.getPosition()[0]
             col = player.getPosition()[1]
-            while (self.board[row][col] != "-"):
-                col = random.randint(0, 11)
-                player.changePosition(row, col)
-            self.placePlayer(player, row, col)
+            if (self.board[row][col] == "-"):
+                self.placePlayer(player, row, col)
+            else:
+                while (self.board[row][col] != "-"):
+                    newCol = random.randint(0, 11)
+                    if (self.board[row][newCol] == "-"):
+                        self.placePlayer(player, row, newCol)
 
     def placePlayer(self, player, row, col):
         self.board[row][col] = player.getSymbol()
         player.changePosition(row , col)
 
-    def checkLegalPlacement(self, x, y):
-        if (x > 11 or x < 0):
+    def checkLegalPlacement(self, row, col):
+        if (col > 11 or col < 0):
             return False
-        elif (y > 8 or y < 0):
+        elif (row > 8 or row < 0):
+            return False
+        elif (self.board[row][col] != "-"):
             return False
         else:
             return True
 
-    def enterRoom(self, player):
-        y = player.getPosition()[1]
-        if (y < 2 or y > 6):
-            return (True, self.board[player.getPosition()[0]][y])
+    def inRoom(self, player):
+        row = player.getPosition()[0]
+        if (row < 2 or row > 6):
+            return True
+        else:
+            return False
 
     def move(self, player, roll):
-        for i in range(1, roll + 1):
-            x = player.getPosition()[0]
-            y = player.getPosition()[1]
-            x2 = x
-            y2 = y
-            sym = player.getPosition()[1]
-            illegal = True
-            while(illegal):
-                direction = str(input("What direction (D, U, L, R) ?"))
+        print("You rolled a " + str(roll))
+        guess = False
+        for i in range(0, roll):
+            run = True
+            while(run):
+                direction = str(input("What direction (D, U, L, R)?"))
                 if (direction != "D" and direction != "U" and direction != "L" and direction != "R"):
                     print("Invalid direction. Try again.")
                     continue
+                row = player.getPosition()[0]
+                col = player.getPosition()[1]
                 if (direction == "D"):
-                    y2 = y -1
-                    legal = self.checkLegalPlacement(x, y2)
-                    if (legal == False):
+                    if (self.checkLegalPlacement((row + 1), col) == False):
                         print("Oops! Out of bounds. Try again.")
                         continue
                     else:
-                        self.board[x][y] = "-"
-                        self.board[x][y2] = sym
-                        player.changePosition(x, y2)
-                        illegal = False
+                        self.board[row][col] = "-"
+                        self.placePlayer(player, (row + 1), col)
+                        run = False
                 elif (direction == "U"):
-                    y2 = y + 1
-                    legal = self.checkLegalPlacement(x, y2)
-                    if (legal == False):
+                    if (self.checkLegalPlacement((row - 1), col) == False):
                         print("Oops! Out of bounds. Try again.")
                         continue
                     else:
-                        self.board[x][y] = "-"
-                        self.board[x][y2] = sym
-                        player.changePosition(x, y2)
-                        illegal = False
-                elif(direction == "L"):
-                    x2 = x - 1
-                    legal = self.checkLegalPlacement(x2, y)
-                    if (legal == False):
+                        self.board[row][col] = "-"
+                        self.placePlayer(player, (row - 1), col)
+                        run = False
+                elif (direction == "L"):
+                    if (self.checkLegalPlacement(row, (col - 1)) == False):
                         print("Oops! Out of bounds. Try again.")
                         continue
                     else:
-                        self.board[x][y] = "-"
-                        self.board[x2][y] = sym
-                        player.changePosition(x2, y)
-                        illegal = False
+                        self.board[row][col] = "-"
+                        self.placePlayer(player, row, (col - 1))
+                        run = False
                 else:
-                    x2 = x + 1
-                    legal = self.checkLegalPlacement(x2, y)
-                    if (legal == False):
+                    if (self.checkLegalPlacement(row, (col + 1)) == False):
                         print("Oops! Out of bounds. Try again.")
                         continue
                     else:
-                        self.board[x][y] = "-"
-                        self.board[x2][y] = sym
-                        player.changePosition(x2, y)
-                    illegal = False
+                        self.board[row][col] = "-"
+                        self.placePlayer(player, row, (col + 1))
+                        run = False
+                self.printBoard()
+                if (self.inRoom(player) == True):
+                    guess = True
+            if (guess == True):
+                player.guess()
+                break
+
+
 

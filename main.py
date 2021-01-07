@@ -19,6 +19,14 @@ board = Board()
 board.setUpGame(players)
 board.printBoard()
 
+for player in players:
+    player.showHand()
+
+while(True):
+    for player in players:
+        print("Player " + player.getSymbol() + "'s turn!")
+        board.move(player, player.rollDice())
+        player.guess(players)
 
 
 
