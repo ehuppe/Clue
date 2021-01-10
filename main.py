@@ -18,15 +18,19 @@ for x in players:
 board = Board()
 board.setUpGame(players)
 board.printBoard()
+deck.showMurder()
 
-for player in players:
-    player.showHand()
-
-while(True):
+run = True
+while(run):
     for player in players:
         print("Player " + player.getSymbol() + "'s turn!")
-        board.move(player, player.rollDice())
-        player.guess(players)
+        game = board.move(players, player, player.rollDice(), deck)
+        if (game == True):
+            run = False
+            break
+
+
+
 
 
 

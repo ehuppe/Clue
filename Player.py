@@ -15,19 +15,23 @@ class Player:
         self.position = [4, random.randint(0, 11)]
         self.symbol = symbol
 
-    def getSymbol(self):
+    def getSymbol(self): # returns player's symbol
         return self.symbol
 
-    def getPosition(self):
+    def getPosition(self): # returns player's position
         return self.position
 
-    def getHand(self):
+    def getHand(self): # returns the player's hand - for editing purposes
         return self.hand
 
-    def changePosition(self, x, y):
+    def showHand(self): # shows hand - for editing purposes
+        for x in self.hand:
+            x.show()
+
+    def changePosition(self, x, y): # changes the player's position
         self.position = [x, y]
 
-    def rollDice(self):
+    def rollDice(self): # rolls dice
         return random.randint(1, 6)
 
     def addCard(self, card):  # adds card to hand
@@ -39,11 +43,7 @@ class Player:
     def checkTracker(self):  # looks at tracker
         self.tracker.look()
 
-    def showHand(self):
-        for x in self.hand:
-            x.show()
-
-    def checkGuess(self, person, weapon, room):
+    def checkGuess(self, person, weapon, room): # checks another player's guess
         for i in self.hand:
             if i.getName() == person:
                 return i.getName()
@@ -53,13 +53,14 @@ class Player:
                 return i.getName()
         return False
 
-    def accuse(self, deck):  # makes final accusation
+    def accuse(self, deck): # makes final accusation
         self.checkTracker()
         person = str(input("What suspect is your final accusation?"))
         weapon = str(input("What weapon is your final accusation?"))
         room = str(input("What room is your final accusation?"))
+        return deck.checkAccusation(person, weapon, room)
 
-    def guess(self, players):
+    def guess(self, players): # allows a player to guess (in the correct order)
         person = str(input("Suspect?"))
         weapon = str(input("Weapon?"))
         room = str(input("Room?"))

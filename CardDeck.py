@@ -18,7 +18,7 @@ class Deck:
         for r in ["Kitchen", "Ballroom", "Conservatory", "Dining Room", "Lounge", "Study"]:
             self.rooms.append(Card(3, r))
 
-    def murder(self):  # murder occurs -- picks murder carsd and removes them from the respective decks
+    def murder(self):  # murder occurs -- picks murder cards and removes them from the respective decks
         x = random.randint(0, 5)
         self.murderCards.append(self.people.pop(x))
         x = random.randint(0 , 5)
@@ -51,18 +51,18 @@ class Deck:
             if (empty):
                 break
 
-    def setUpGame(self, players):
+    def setUpGame(self, players): # combines all necessary methods to set up the game
         self.build()
         self.murder()
         self.fullDeck()
         self.shuffle()
         self.deal(players)
 
-    def showMurder(self):
+    def showMurder(self): # shows murder cards -- for editing purposes
         for c in self.murderCards:
             c.show()
 
-    def checkAccusation(self, person, weapon, room):
+    def checkAccusation(self, person, weapon, room): # checks if a player's accusation is correct
         if (self.murderCards[0].getName() == person):
             if (self.murderCards[1].getName() == weapon):
                 if (self.murderCards[2].getName() == room):
