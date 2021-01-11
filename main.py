@@ -11,7 +11,7 @@ players = [player1, player2, player3, player4]
 deck = Deck()
 deck.setUpGame(players)
 
-for x in players:
+for x in players: # edits all players' trackers with their cards
     for y in x.getHand():
         x.editTracker(y.getType(), y.getName(), "X")
 
@@ -21,8 +21,8 @@ board.printBoard()
 deck.showMurder()
 
 run = True
-while(run):
-    for player in players:
+while(run): # game loop
+    for player in players: # runs through players and has them take turns
         print("Player " + player.getSymbol() + "'s turn!")
         game = board.move(players, player, player.rollDice(), deck)
         if (game == True):

@@ -44,12 +44,12 @@ class Player:
         self.tracker.look()
 
     def checkGuess(self, person, weapon, room): # checks another player's guess
-        for i in self.hand:
-            if i.getName() == person:
+        for i in self.hand:  # goes through hand
+            if i.getName() == person:  # if guess matches person
                 return i.getName()
-            elif i.getName() == weapon:
+            elif i.getName() == weapon:  # if guess matches weapon
                 return i.getName()
-            elif i.getName() == room:
+            elif i.getName() == room:  # if guess matches room
                 return i.getName()
         return False
 
@@ -67,18 +67,18 @@ class Player:
         next = players.index(self) + 1
         ogSpot = players.index(self)
         run = True
-        while (run):
-            if (next == len(players)):
+        while (run):  # guesses until someone has something
+            if (next == len(players)):  # skips to front if at end of players array
                 next = 0
-            elif (next == ogSpot):
+            elif (next == ogSpot):  # if already checked all players
                 print("No one has anything.")
                 return
-            else:
-                if (players[next].checkGuess(person, weapon, room) == False):
+            else:  # if making guess
+                if (players[next].checkGuess(person, weapon, room) == False):  # if player does not have anything
                     print(players[next].getSymbol() + " does not have anything.")
                     next += 1
                     continue
-                else:
+                else:  # if player has something
                     print(players[next].getSymbol() + " has " + players[next].checkGuess(person, weapon, room))
                     run = False
 
